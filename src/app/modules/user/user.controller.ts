@@ -15,6 +15,22 @@ const createUser = catchAsync(async (req, res) => {
     });
 });
 
+// Login User Controller
+const loginUser = catchAsync(async (req, res) => {
+    const { email, password } = req.body;
+
+    const { accessToken, refreshToken, loggedInUser } =
+        await UserService.loginUserFromDB(email, password);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'User logged in successfully',
+        data: { accessToken, refreshToken, loggedInUser },
+    });
+});
+
 export const UserController = {
     createUser,
+    loginUser,
 };

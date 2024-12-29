@@ -8,9 +8,21 @@ export type TUser = {
     password: string;
 };
 
+export type TUserLogin = {
+    email: string;
+    password: string;
+};
+
+export type TJwtPayload = {
+    email?: string;
+    name?: string;
+    role?: string;
+    id?: Types.ObjectId;
+};
+
 export type TUserWithId = TUser & { _id: Types.ObjectId };
 
-export interface UserModel extends Model<TUser> {
+export interface IUser extends Model<TUser> {
     //instance methods for checking if the user exist
     isUserExistsByEmail(email: string): Promise<Partial<TUserWithId>>;
     //instance methods for checking if passwords are matched

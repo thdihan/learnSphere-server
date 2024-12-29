@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { TUser } from './user.interface';
+import { IUser, TUser } from './user.interface';
 import bcrypt from 'bcrypt';
 import config from '../../config';
 
@@ -32,4 +32,19 @@ UserSchema.post('save', function (doc, next) {
     next();
 });
 
-export const UserModel = model<TUser>('User', UserSchema);
+// Static methods
+// These methods are used to check if the user exists by email
+UserSchema.statics.isUserExistsByEmail = async function (email: string) {
+    return await UserModel.findOne({ email }).select('+password');
+};
+
+// Static methods
+// These methods are used to check if the password is matched
+UserSchema.statics.isPasswordMatched = async function (
+    plainTextPassword,
+    hashedPassword,
+) {
+    return await bcrypt.compare(plainTextPassword, hashedPassword);
+};
+
+export const UserModel = model<TUser, IUser>('User', UserSchema);
