@@ -17,4 +17,11 @@ export default {
     cloudinary_cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     cloudinary_api_key: process.env.CLOUDINARY_API_KEY,
     cloudinary_api_secret: process.env.CLOUDINARY_API_SECRET,
+
+    google_api_key: process.env.GOOGLE_API_KEY,
+    gemini_api_key: process.env.GEMINI_API_KEY,
+    astra_db_namespace: process.env.ASTRA_DB_NAMASPACE,
+    astra_db_collection: process.env.ASTRA_DB_COLLECTION,
+    astra_db_api_endpoint: process.env.ASTRA_DB_API_ENDPOINT,
+    astra_db_application_token: process.env.ASTRA_DB_APPLICATION_TOKEN,
 };

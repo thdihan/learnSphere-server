@@ -13,4 +13,10 @@ router.post(
     NotesController.createNote,
 );
 
+router.get('/', NotesController.getNotes);
+router.get('/:id', NotesController.getNoteById);
+router.put('/:id', NotesController.updateNote);
+
+router.post('/createCollection', NotesController.createCollection);
+
 export const NotesRoute = router;
