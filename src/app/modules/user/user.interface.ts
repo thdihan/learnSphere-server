@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { Model, Types } from 'mongoose';
+import { USER_ROLE } from './user.constant';
 
 export type TUser = {
     role: 'student' | 'teacher';
@@ -35,3 +36,5 @@ export interface IUser extends Model<TUser> {
         jwtIssuedTimestamp: number,
     ): boolean;
 }
+
+export type TUserRole = keyof typeof USER_ROLE;

@@ -4,14 +4,15 @@ import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import config from '../config';
-import { TUserRole } from '../modules/user/user.interface';
-import { User } from '../modules/user/user.model';
 import catchAsync from '../utils/catchAsync';
 import AppError from '../utils/appError';
+import { TUserRole } from '../modules/user/user.interface';
+import { UserModel } from '../modules/user/user.model';
 
 const auth = (...requiredRoles: TUserRole[]) => {
     return catchAsync(
         async (req: Request, res: Response, next: NextFunction) => {
+            // Step 1 : Get token from header
             const tokenWithBearer = req.headers.authorization;
 
             // checking if the token is missing
@@ -21,6 +22,8 @@ const auth = (...requiredRoles: TUserRole[]) => {
                     'You have no access to this route',
                 );
             }
+
+            // Step 2 : Extract token from header
             const token = tokenWithBearer.split(' ')[1];
             // checking if the given token is valid
             const decoded = jwt.verify(
@@ -30,8 +33,8 @@ const auth = (...requiredRoles: TUserRole[]) => {
 
             const { role, email, iat } = decoded;
 
-            // checking if the user is exist
-            const user = await User.isUserExistsByEmail(email);
+            // Step 3 : Check if user exists
+            const user = await UserModel.isUserExistsByEmail(email);
 
             if (!user) {
                 throw new AppError(
@@ -40,6 +43,7 @@ const auth = (...requiredRoles: TUserRole[]) => {
                 );
             }
 
+            // Step 4 : Check if role is valid
             if (requiredRoles && !requiredRoles.includes(role)) {
                 throw new AppError(
                     httpStatus.UNAUTHORIZED,
