@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextFunction, Request, Response } from 'express';
 import { TFile } from '../modules/notes/notes.interface';
+import { parsePdfData } from '../utils/parsePdf';
 // import { TNote } from '../modules/notes/notes.interface';
 
 const processFileData = (file: any): TFile => {
@@ -13,12 +14,13 @@ const processFileData = (file: any): TFile => {
         fileUrl: file.path,
     };
 };
-export const fileProcessor = (
+export const fileProcessor = async (
     req: Request,
     res: Response,
     next: NextFunction,
 ) => {
     const files: TFile[] = [];
+
     if (Array.isArray(req.files)) {
         // If req.files is an array
         req.files.forEach((file) => {
@@ -36,9 +38,11 @@ export const fileProcessor = (
 
     const parsedBody = JSON.parse(req.body.note);
 
+    const content: string = await parsePdfData(files);
+
     req.body = {
         title: parsedBody.title,
-        content: '',
+        content: content.replace(/\n+/g, ' '),
         files,
         owner: req.params.userId,
     };
