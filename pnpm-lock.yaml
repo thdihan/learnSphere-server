@@ -14,6 +14,9 @@ importers:
       '@google/generative-ai':
         specifier: ^0.21.0
         version: 0.21.0
+      '@langchain/google-genai':
+        specifier: ^0.1.6
+        version: 0.1.6(@langchain/core@0.3.26(openai@4.77.0(zod@3.24.1)))(zod@3.24.1)
       axios:
         specifier: ^1.7.7
         version: 1.7.7
@@ -40,7 +43,7 @@ importers:
         version: 9.0.2
       langchain:
         specifier: ^0.3.8
-        version: 0.3.8(@langchain/core@0.3.26(openai@4.77.0(zod@3.24.1)))(axios@1.7.7)(openai@4.77.0(zod@3.24.1))
+        version: 0.3.8(@langchain/core@0.3.26(openai@4.77.0(zod@3.24.1)))(@langchain/google-genai@0.1.6(@langchain/core@0.3.26(openai@4.77.0(zod@3.24.1)))(zod@3.24.1))(axios@1.7.7)(openai@4.77.0(zod@3.24.1))
       lint-staged:
         specifier: ^15.1.0
         version: 15.2.9
@@ -164,6 +167,12 @@ packages:
   '@langchain/core@0.3.26':
     resolution: {integrity: sha512-6RUQHEp8wv+JwtYIIEBYBzbLlcAQZFc7EDOgAM0ukExjh9HiXoJzoWpgMRRCrr/koIbtwXPJUqBprZK1I1CXHQ==}
     engines: {node: '>=18'}
+
+  '@langchain/google-genai@0.1.6':
+    resolution: {integrity: sha512-LF3fan9pvgFa1vw2/IYGhi5KjppE0OvPFX3QQBUshBLpXWERP+BSpSD7jcXyqm9Kf7DcFj7w5/2knKeEwih8Xg==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@langchain/core': '>=0.3.17 <0.4.0'
 
   '@langchain/openai@0.3.16':
     resolution: {integrity: sha512-Om9HRlTeI0Ou6D4pfxbWHop4WGfkCdV/7v1W/+Jr7NSf0BNoA9jk5GqGms8ZtOYSGgPvizDu3i0TrM3B4cN4NA==}
@@ -2021,6 +2030,14 @@ snapshots:
     transitivePeerDependencies:
       - openai
 
+  '@langchain/google-genai@0.1.6(@langchain/core@0.3.26(openai@4.77.0(zod@3.24.1)))(zod@3.24.1)':
+    dependencies:
+      '@google/generative-ai': 0.21.0
+      '@langchain/core': 0.3.26(openai@4.77.0(zod@3.24.1))
+      zod-to-json-schema: 3.24.1(zod@3.24.1)
+    transitivePeerDependencies:
+      - zod
+
   '@langchain/openai@0.3.16(@langchain/core@0.3.26(openai@4.77.0(zod@3.24.1)))':
     dependencies:
       '@langchain/core': 0.3.26(openai@4.77.0(zod@3.24.1))
@@ -3005,7 +3022,7 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  langchain@0.3.8(@langchain/core@0.3.26(openai@4.77.0(zod@3.24.1)))(axios@1.7.7)(openai@4.77.0(zod@3.24.1)):
+  langchain@0.3.8(@langchain/core@0.3.26(openai@4.77.0(zod@3.24.1)))(@langchain/google-genai@0.1.6(@langchain/core@0.3.26(openai@4.77.0(zod@3.24.1)))(zod@3.24.1))(axios@1.7.7)(openai@4.77.0(zod@3.24.1)):
     dependencies:
       '@langchain/core': 0.3.26(openai@4.77.0(zod@3.24.1))
       '@langchain/openai': 0.3.16(@langchain/core@0.3.26(openai@4.77.0(zod@3.24.1)))
@@ -3021,6 +3038,7 @@ snapshots:
       zod: 3.24.1
       zod-to-json-schema: 3.24.1(zod@3.24.1)
     optionalDependencies:
+      '@langchain/google-genai': 0.1.6(@langchain/core@0.3.26(openai@4.77.0(zod@3.24.1)))(zod@3.24.1)
       axios: 1.7.7
     transitivePeerDependencies:
       - encoding
