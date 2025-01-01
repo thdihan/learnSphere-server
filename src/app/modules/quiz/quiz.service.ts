@@ -48,7 +48,7 @@ const generateQuizByAI = async (message: string) => {
                 END CONTEXT
                 ------------------------------
 
-                Also a format of quizes format is given below for your reference. Follow the same format to generate quiz questions.
+                Also few example of quizes are given below for your reference. Follow the reference pattern to generate quiz questions. At the end the end please generate a json object as response.
 
                 START QUIZ FORMAT
                 ${examplePrompt}
@@ -60,6 +60,7 @@ const generateQuizByAI = async (message: string) => {
             `,
     };
 
+    // Also a format of quizes format is given below for your reference. Follow the same format to generate quiz questions.
     console.log('[Template]: ', template);
     console.log('[Message] : ', message);
 

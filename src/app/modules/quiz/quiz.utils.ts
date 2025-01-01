@@ -51,17 +51,19 @@ const quizExamples = [
     },
 ];
 
-export const examplePrompt = quizExamples
-    .map((quiz, index) => {
-        return `
-        Question-${index + 1}: ${quiz.question}
-        Options:
-            ${quiz.options.map((option) => {
-                return `
-                Option-${option.optionId}: ${option.text}
-                `;
-            })}
-        Correct Answer: ${quiz?.options.find((option) => option.optionId === quiz.correctAnswer)?.text}
-    `;
-    })
-    .join('\n');
+// export const examplePrompt = quizExamples
+//     .map((quiz, index) => {
+//         return `
+//         Question-${index + 1}: ${quiz.question}
+//         Options:
+//             ${quiz.options.map((option) => {
+//                 return `
+//                 Option-${option.optionId}: ${option.text}
+//                 `;
+//             })}
+//         Correct Answer: ${quiz?.options.find((option) => option.optionId === quiz.correctAnswer)?.text}
+//     `;
+//     })
+//     .join('\n');
+
+export const examplePrompt = JSON.stringify(quizExamples);
